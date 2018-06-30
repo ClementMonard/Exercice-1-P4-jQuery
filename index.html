@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <script src = "jquery-3.2.1.js"></script>
+    <title>Exercice 1 Partie 4</title>
+  </head>
+  <body>
+<select>
+  <option value="1">Pierre</option>
+  <option value="2">Feuille</option>
+  <option value="3">Ciseaux</option>
+</select>
+<button type="button" name="button" id="shifumi">Shifumi !</button>
+<div id="victory"></div>
+<div id="loose"></div>
+<div id="draw"></div>
+<div id="ratio"></div>
+  </body>
+  <script>
+  //Déclaration de la variable des victoires
+  var victory = 0;
+  //Déclaration de la variable des défaites
+  var loose = 0;
+  //Déclaration de la variable du nombre de parties joués
+  var games = 0;
+  //Déclaration de la variable des égalités
+  var draw = 0;
+  //Déclaration de la fonction permettant de jouer au shifumi en cliquant sur le bouton
+    $('#shifumi').click(function(){
+      //Numéro random entre 1 et 3 pour l'utilisateur
+    var choixUtilisateur = Math.floor(Math.random()*3)+1;
+    //Incrémentation du nombre de parties à chaque fois que l'on clique sur le bouton shifumi
+    games++;
+    //Si l'utilisateur tombe sur le numéro random 1
+    if (choixUtilisateur == 1) {
+      // 1 sera Pierre
+      choixUtilisateur = 'Pierre';
+    }
+    //Sinon si l'utilisateur tombe sur le numéro random 2
+    else if (choixUtilisateur == 2) {
+      // 2 sera Feuille
+      choixUtilisateur = 'Feuille';
+    }
+    //Autre Ciseaux
+    else {
+      choixUtilisateur = 'Ciseaux';
+    }
+    //Numéro random entre 1 et 3 pour le bot
+    var choixOrdi = Math.floor(Math.random()*3)+1;
+    //Pareil que précédemment
+    if (choixOrdi == 1) {
+      choixOrdi = 'Pierre';
+    }
+    else if (choixOrdi == 2) {
+      choixOrdi = 'Feuille';
+    }
+    else {
+      choixOrdi = 'Ciseaux';
+    }
+    //Si les chiffres sont identiques pour l'utilisateur et le bouton
+    //Il y aura égalité
+    if (choixOrdi === choixUtilisateur) {
+      //Incrémentation de draw
+      draw++;
+      alert('Egalité ! vous êtes tous les deux tombés sur : ' + choixUtilisateur);
+    }
+    //Condition qui permettra de comparer les résultats et de déterminer le gagnant et le perdant
+    else if ((choixOrdi == 'Ciseaux' && choixUtilisateur == 'Feuille') || (choixOrdi == 'Pierre' && choixUtilisateur == 'Ciseaux') || (choixOrdi == 'Feuille' && choixUtilisateur == 'Pierre')) {
+      alert(' Vous avez perdu ! le bot a eu : ' + choixOrdi + ' et vous ' + choixUtilisateur);
+      //Incrémentation de la variable loose
+      loose++;
+    }
+    else {
+      alert('Vous avez gagné, vous avez eu ' + choixUtilisateur + ' et le bot est tombé sur ' + choixOrdi);
+      //Incrémentation de la variable victory
+        victory++;
+    }
+    //Affichage du nombre de victoires
+    $('#victory').text('win : ' + victory);
+    //Affichage du nombre de défaites
+    $('#loose').text ('loose : ' + loose);
+    //Affichage du nombre d'égalités
+    $('#draw').text('Egalité : ' + draw);
+    //Calcul pour voir le ratio
+    $('#ratio').text('Ratio : ' + victory / games * 100 + '%');
+  });
+  </script>
+</html>
